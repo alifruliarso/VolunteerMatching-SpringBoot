@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{organizationMember.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{organizationMember.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/organizationMembers/add}" class="btn btn-primary ms-2">[[#{organizationMember.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${organizationMembers.empty}">[[#{organizationMember.list.empty}]]</div>
+            <div th:if="${!organizationMembers.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{organizationMember.userId.label}]]</th>
+                            <th scope="col">[[#{organizationMember.orgId.label}]]</th>
+                            <th scope="col">[[#{organizationMember.memberRole.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="organizationMember : ${organizationMembers}">
+                            <td>[[${organizationMember.userId}]]</td>
+                            <td>[[${organizationMember.orgId}]]</td>
+                            <td>[[${organizationMember.memberRole}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/organizationMembers/edit/{id}(id=${organizationMember.id})}" class="btn btn-sm btn-secondary">[[#{organizationMember.list.edit}]]</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

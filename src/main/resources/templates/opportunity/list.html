@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>[[#{opportunity.list.headline}]]</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex flex-wrap mb-4">
+            <h1 class="flex-grow-1">[[#{opportunity.list.headline}]]</h1>
+            <div>
+                <a th:if="${hasOrganizer}" th:href="@{/opportunities/add}"
+                    class="btn btn-primary ms-2">[[#{opportunity.list.createNew}]]</a>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">
+                    <span class="badge rounded-pill text-bg-info ms-2 fs-5">Login to register</span>
+                </a>
+            </div>
+        </div>
+        <div th:if="${opportunities.empty}">[[#{opportunity.list.empty}]]</div>
+        <div th:if="${!opportunities.empty}" class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">[[#{opportunity.title.label}]]</th>
+                        <th scope="col">[[#{opportunity.description.label}]]</th>
+                        <th scope="col">[[#{opportunity.address.label}]]</th>
+                        <th scope="col">[[#{opportunity.slotsTotal.label}]]</th>
+                        <th><!-- --></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="opportunity : ${opportunities}">
+                        <td>
+                            <div class="card-body">
+                                <a th:href="@{/opportunities/{id}(id=${opportunity.id})}"
+                                    class="btn btn-outline-primary btn-sm">[[${opportunity.title}]]</a>
+                            </div>
+                        </td>
+                        <td>[[${opportunity.description}]]</td>
+                        <td>[[${opportunity.address}]]</td>
+                        <td>[[${opportunity.totalSlots}]]</td>
+                        <td>
+                            <div class="float-end text-nowrap">
+                                <a th:if="${hasOrganizer}" th:href="@{/opportunities/edit/{id}(id=${opportunity.id})}"
+                                    class="btn btn-sm btn-secondary"><i
+                                        class="bi bi-pencil-square"></i>[[#{opportunity.list.edit}]]</a>
+                                <form th:action="@{/opportunities/{id}(id=${opportunity.id})/registrations}"
+                                    th:data-confirm-message="#{opportunity.registrations.confirm}" method="post"
+                                    class="js-submit-confirm d-inline">
+                                    <button th:unless="${opportunity.registered}"
+                                        sec:authorize="hasAnyRole('VOLUNTEER')" type="submit"
+                                        class="btn btn-sm btn-primary">[[#{opportunity.list.registrations}]]</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

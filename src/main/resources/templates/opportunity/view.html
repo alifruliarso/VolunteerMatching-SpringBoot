@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>View</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <!-- Opportunity Details Header -->
+        <div class="opportunity-header mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/opportunities}"
+                            class="text-decoration-none">Opportunities</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Opportunity Details</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h1 class="opportunity-title mb-2" th:text="${opportunity.title}">Opportunity Title</h1>
+                    <div class="opportunity-meta">
+                        <span class="badge bg-primary me-2" th:text="${opportunity.orgName}">Company Name</span>
+                    </div>
+                </div>
+                <div th:if="${hasVolunteer}" class="opportunity-actions">
+                    <form th:action="@{/opportunities/{id}/registrations(id=${opportunity.id})}"
+                        th:data-confirm-message="#{opportunity.registrations.confirm}" method="post"
+                        class="js-submit-confirm d-inline">
+                        <button th:unless="${opportunity.registered}" sec:authorize="hasAnyRole('VOLUNTEER')"
+                            type="submit" class="btn btn-primary btn-lg"><i class="fas fa-user-plus me-2"></i>Apply
+                            Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Main Content Column -->
+            <div class="col-lg-8">
+                <!-- Description Card -->
+                <div class="card opportunity-card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-file-alt me-2 text-primary"></i>Description
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text opportunity-description" th:text="${opportunity.description}">
+                            Detailed description of the volunteer opportunity goes here...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Details Card -->
+                <div class="card opportunity-card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>Opportunity Details
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="fas fa-map-marker-alt me-2 text-muted"></i>Address
+                                    </div>
+                                    <div class="detail-value" th:text="${opportunity.address}">
+                                        123 Healthcare Street, Medical District, City, State 12345
+                                    </div>
+                                </div>
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="fas fa-calendar-alt me-2 text-muted"></i>Date & Time
+                                    </div>
+                                    <div class="detail-value">
+                                        <div th:text="${#temporals.format(opportunity.startTime, 'MMMM dd, yyyy')}">
+                                            January 15, 2024</div>
+                                        <small class="text-muted"
+                                            th:text="${#temporals.format(opportunity.startTime, 'hh:mm a') + ' - ' + #temporals.format(opportunity.endTime, 'hh:mm a')}">
+                                            09:00 AM - 05:00 PM
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="fas fa-users me-2 text-muted"></i>Volunteer Slots
+                                    </div>
+                                    <div class="detail-value">
+                                        <span class="slot-available"
+                                            th:hx-get="@{/api/opportunities/{id}/slotAvailable(id=${opportunity.id})}"
+                                            hx-swap="innerHTML" hx-trigger="load, every 50s">
+                                            slot-available
+                                        </span>
+                                        <div class="progress mt-1" role="progressbar" aria-valuemin="0"
+                                            aria-valuemax="100" style="height: 20px;">
+                                            <div class="progress-bar bg-success" th:id="'progress-' + ${opportunity.id}"
+                                                th:hx-get="@{/api/opportunities/{id}/slotFilledProgress(id=${opportunity.id})}"
+                                                hx-trigger="load, every 120s" hx-swap="none"
+                                                hx-on::after-request="this.setAttribute('style', 'width: ' + event.detail.xhr.responseText + '%;')">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="fas fa-building me-2 text-muted"></i>Organization
+                                    </div>
+                                    <div class="detail-value" th:text="${opportunity.orgName}">
+                                        Community Health Center
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration -->
+                <div class="card opportunity-card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>Registration Details
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div sec:authorize="isAuthenticated()" class="col-md-6">
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="bi bi-info-circle text-info"></i> Registration
+                                    </div>
+                                    <div th:if="${opportunity.registered}" class="detail-value"
+                                        th:text="${opportunity.registrationStatus}">
+                                        <i class="bi bi-info-circle text-info"></i>
+                                    </div>
+                                    <div th:unless="${opportunity.registered}" class="detail-value"><i
+                                            class="bi bi-ban fw-semibold"> Not Registered</i></div>
+                                </div>
+                                <div class="detail-item mb-3">
+                                    <div class="detail-label">
+                                        <i class="fas fa-calendar-alt me-2 text-muted"></i>Date & Time
+                                    </div>
+                                    <div class="detail-value">
+                                        <div
+                                            th:text="${#temporals.format(opportunity.registrationTime, 'MMMM dd, yyyy')}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div sec:authorize="!isAuthenticated()" class="col-md-6">
+                                <div class="detail-label">
+                                    <a th:href="@{/login}">
+                                        <span class="badge bg-primary me-2 fs-5">Login to register for this
+                                            opportunity</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Column -->
+            <div class="col-lg-4">
+                <!-- Skills Required Card -->
+                <div class="card opportunity-card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-tasks me-2 text-primary"></i>Required Skills
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="detail-label">
+                            <a th:if="${hasOrganizer}"
+                                th:href="@{'/opportunities/' + ${opportunity.id} + '/requirements'}"
+                                class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item mb-2" th:each="skill : ${opportunity.skills}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="skill-name" th:text="${skill.name}">Skill Name</span>
+                                        <span th:if="${skill.mandatory}" class="badge bg-danger ms-2 mandatory-badge">
+                                            <i class="fas fa-asterisk me-1"></i>Mandatory
+                                        </span>
+                                        <span th:unless="${skill.mandatory}"
+                                            class="badge bg-warning ms-2 optional-badge">
+                                            <i class="fas fa-star me-1"></i>Preferred
+                                        </span>
+                                    </div>
+                                    <i th:if="${skill.mandatory}" class="fas fa-exclamation-circle text-danger"></i>
+                                    <i th:unless="${skill.mandatory}" class="fas fa-star text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Info Card -->
+                <div class="card opportunity-card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-clock me-2 text-primary"></i>Quick Info
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-info-item mb-3">
+                            <div class="info-label">Location Type</div>
+                            <div class="info-value">On-site</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information Card -->
+                <div class="card opportunity-card">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-user-md me-2 text-primary"></i>Contact Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{home.index.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <!-- Hero Section -->
+            <section class="hero-section mb-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-9">
+                        <h1 class="hero-title mb-4">[[#{home.index.headline}]]</h1>
+                        <p class="hero-subtitle mb-4">[(#{home.index.text})]</p>
+                        <div class="hero-actions">
+                            <a th:href="@{/opportunities}" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-search me-2"></i>Find Volunteer Opportunities
+                            </a>
+                            <a th:href="@{/organization/signup}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-hands-helping me-2"></i>Post Opportunities
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="hero-image">
+                            <img th:src="@{/images/logo.png}" alt="Healthcare Volunteers" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section mb-5 py-4">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <h3 class="stat-number">1,200+</h3>
+                            <p class="stat-label">Active Volunteers</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <h3 class="stat-number">85</h3>
+                            <p class="stat-label">Healthcare Partners</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <h3 class="stat-number">2,500+</h3>
+                            <p class="stat-label">Hours Served</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <h3 class="stat-number">24</h3>
+                            <p class="stat-label">Communities Served</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works mb-5">
+                <h2 class="text-center mb-5">How It Works</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card text-center">
+                            <div class="step-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h4 class="step-title">Create Profile</h4>
+                            <p class="step-description">Sign up as a volunteer or healthcare organization and create your profile with skills and needs.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card text-center">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h4 class="step-title">Find Matches</h4>
+                            <p class="step-description">Our system matches volunteer skills with healthcare organization requirements.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card text-center">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4 class="step-title">Make Impact</h4>
+                            <p class="step-description">Connect and start making a difference in your community's healthcare.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions Section -->
+            <section class="quick-actions mb-5">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="action-card bg-light p-4 rounded h-100">
+                            <h4 class="mb-3">For Volunteers</h4>
+                            <p class="mb-3">Find healthcare volunteer opportunities that match your skills and availability.</p>
+                            <div class="list-group">
+                                <a th:href="@{/opportunities}" class="list-group-item list-group-item-action d-flex align-items-center">
+                                    <i class="fas fa-search me-3 text-primary"></i>
+                                    <div>
+                                        <strong>Browse Opportunities</strong>
+                                        <small class="d-block text-muted">Find roles that match your skills</small>
+                                    </div>
+                                </a>
+                                <a th:href="@{/volunteer/signup}" class="list-group-item list-group-item-action d-flex align-items-center">
+                                    <i class="fas fa-user-plus me-3 text-primary"></i>
+                                    <div>
+                                        <strong>Register as Volunteer</strong>
+                                        <small class="d-block text-muted">Create your volunteer profile</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="action-card bg-light p-4 rounded h-100">
+                            <h4 class="mb-3">For Organizations</h4>
+                            <p class="mb-3">Connect with qualified volunteers to support your healthcare services.</p>
+                            <div class="list-group">
+                                <a th:href="@{/organization/signup}" class="list-group-item list-group-item-action d-flex align-items-center">
+                                    <i class="fas fa-hospital me-3 text-primary"></i>
+                                    <div>
+                                        <strong>Register Organization</strong>
+                                        <small class="d-block text-muted">Join our network</small>
+                                    </div>
+                                </a>
+                                <a th:href="@{/organizations}" class="list-group-item list-group-item-action d-flex align-items-center">
+                                    <i class="fas fa-list me-3 text-primary"></i>
+                                    <div>
+                                        <strong>Manage Opportunities</strong>
+                                        <small class="d-block text-muted">Post and manage volunteer needs</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Dashboard Section -->
+            <section class="admin-dashboard mt-5 pt-4 border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="mb-3 text-muted">[[#{home.index.exploreEntities}]]</h4>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Organizations</h6>
+                                        <p class="card-text small text-muted">Manage healthcare organizations</p>
+                                        <a th:href="@{/organizations}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Opportunities</h6>
+                                        <p class="card-text small text-muted">Manage volunteer opportunities</p>
+                                        <a th:href="@{/opportunities}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Registrations</h6>
+                                        <p class="card-text small text-muted">View volunteer registrations</p>
+                                        <a th:href="@{/registrations}" class="btn btn-outline-primary btn-sm">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Skills</h6>
+                                        <p class="card-text small text-muted">Manage skills database</p>
+                                        <a th:href="@{/skills}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Volunteer Skills</h6>
+                                        <p class="card-text small text-muted">Manage volunteer skills</p>
+                                        <a th:href="@{/volunteerSkills}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Requirements</h6>
+                                        <p class="card-text small text-muted">Opportunity requirements</p>
+                                        <a th:href="@{/opportunityRequirements}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Members</h6>
+                                        <p class="card-text small text-muted">Organization members</p>
+                                        <a th:href="@{/organizationMembers}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Users</h6>
+                                        <p class="card-text small text-muted">User management</p>
+                                        <a th:href="@{/users}" class="btn btn-outline-primary btn-sm">Manage</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

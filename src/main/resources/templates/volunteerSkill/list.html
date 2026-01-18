@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{volunteerSkill.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{volunteerSkill.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/volunteerSkills/add}" class="btn btn-primary ms-2">[[#{volunteerSkill.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${volunteerSkills.empty}">[[#{volunteerSkill.list.empty}]]</div>
+            <div th:if="${!volunteerSkills.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{volunteerSkill.expiryDate.label}]]</th>
+                            <th scope="col">Skill</th>
+                            <th scope="col">[[#{volunteerSkill.verificationStatus.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="volunteerSkill : ${volunteerSkills}">
+                            <td>[[${volunteerSkill.expiryDate}]]</td>
+                            <td>[[${volunteerSkill.skillName}]]</td>
+                            <td>[[${volunteerSkill.verificationStatus}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <!-- <a th:href="@{/volunteerSkills/edit/{id}(id=${volunteerSkill.id})}" class="btn btn-sm btn-secondary">[[#{volunteerSkill.list.edit}]]</a> -->
+                                    <form th:action="@{/volunteerSkills/delete/{id}(id=${volunteerSkill.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{volunteerSkill.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

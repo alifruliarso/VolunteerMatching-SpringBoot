@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{organization.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{organization.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/organizations}" class="btn btn-secondary">[[#{organization.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('organization')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='organization', field='name', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='organization', field='websiteUrl')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='organization', field='adminUserId', required=true)}" />
+                <input type="submit" th:value="#{organization.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

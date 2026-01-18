@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">[[#{app.title}]]</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/flatpickr/4.6.13/dist/flatpickr.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}" defer></script>
+    <script th:src="@{/webjars/flatpickr/4.6.13/dist/flatpickr.min.js}" defer></script>
+    <script th:src="@{/js/app.js}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+        integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header class="healthcare-header">
+        <div class="container">
+            <nav class="navbar navbar-light navbar-expand-md">
+                <a th:href="@{/}" class="navbar-brand d-flex align-items-center">
+                    <img th:src="@{/images/logo.png}" th:alt="#{app.title}" width="40" height="40"
+                        class="d-inline-block align-top health-logo" />
+                    <div class="brand-text ms-2">
+                        <span class="brand-title">[[#{app.title}]]</span>
+                        <small class="brand-subtitle d-none d-sm-block">Healthcare Volunteer Matching</small>
+                    </div>
+                </a>
+                <div class="header-actions d-flex align-items-center">
+                    <!-- <a th:href="@{/registrations}" class="btn btn-outline-primary btn-sm me-2 volunteer-btn">
+                        <i class="fas fa-user-plus me-3"></i>Become a Volunteer</a> -->
+                    <!-- <a th:href="@{/organization/signup}" class="btn btn-primary btn-sm me-3 organization-btn">
+                        <i class="fas fa-hospital me-3"></i>Register Organization</a> -->
+                </div>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+                    th:aria-label="#{navigation.toggle}" aria-controls="navbarToggle" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a th:href="@{/opportunities}" class="nav-link"><i class="fas fa-search me-3"></i>Find
+                                Opportunities</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                id="navbarEntitiesLink" aria-expanded="false">[[#{navigation.entities}]]</button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
+                                <li th:if="${hasOrganizer}"><a th:href="@{/organizations}"
+                                        class="dropdown-item">[[#{organization.list.headline}]]</a></li>
+                                <li th:if="${hasVolunteer}"><a th:href="@{/opportunities}"
+                                        class="dropdown-item">[[#{opportunity.list.headline}]]</a></li>
+                                <li th:if="${hasOrganizer}"><a th:href="@{/registrations}"
+                                        class="dropdown-item">[[#{registration.list.headline}]]</a></li>
+                                <li th:if="${hasVolunteer}"><a th:href="@{/volunteerSkills}" class="dropdown-item">My
+                                        Skills</a></li>
+                                <li th:if="${hasOrganizer}"><a th:href="@{/opportunityRequirements}"
+                                        class="dropdown-item">[[#{opportunityRequirement.list.headline}]]</a></li>
+                                <li th:if="${hasOrganizer}"><a th:href="@{/organizationMembers}"
+                                        class="dropdown-item">[[#{organizationMember.list.headline}]]</a></li>
+                                <li th:if="${hasAdmin}"><a th:href="@{/skills}"
+                                        class="dropdown-item">[[#{skill.list.headline}]]</a></li>
+                                <li th:if="${hasAdmin}"><a th:href="@{/users}"
+                                        class="dropdown-item">[[#{user.list.headline}]]</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- User avatar with dropdown -->
+                <div class="navbar-nav ms-auto">
+                    <li sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}"
+                            class="nav-link fs-5 text-white text-decoration-none">[[#{navigation.login}]]</a>
+                    </li>
+                    <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <div th:if="${not #lists.isEmpty(#authentication.principal.organizations)}">
+                            <p class="organization-name mb-1 text-center"
+                                th:text="${#authentication.principal.organizations[0].name}">Organization Name
+                            </p>
+                        </div>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img th:src="@{https://ui-avatars.com/api/?background=random&name={name}(name=${#authentication.name})}"
+                                alt="User Avatar" width="32" height="32" class="rounded-circle me-2">
+                            <span sec:authentication="name"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item text-decoration-line-through" href="#"><i
+                                        class="bi bi-person me-2"></i>Profile</a></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post" class="m-0">
+                                    <button type="submit" class="dropdown-item">[[#{navigation.logout}]]</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="nav-item">
+                </div>
+                <!-- <div class="nav-item">
+                    <span th:hx-get="@{/api/home/databaseStatus}" hx-trigger="every 30s" hx-swap="innerHTML"
+                        class="text-white fs-6 fst-italic">Checking database connections...</span>
+                </div> -->
+            </nav>
+        </div>
+    </header>
+    <main class="my-5">
+        <div class="container">
+            <p th:if="${MSG_SUCCESS}" class="alert alert-success mb-4" role="alert" data-timeout="5000">
+                [[${MSG_SUCCESS}]]</p>
+            <p th:if="${MSG_INFO}" class="alert alert-info mb-4" role="alert" data-timeout="5000">[[${MSG_INFO}]]</p>
+            <p th:if="${MSG_ERROR}" class="alert alert-danger mb-4" role="alert" data-timeout="5000">[[${MSG_ERROR}]]
+            </p>
+            <div layout:fragment="content" />
+        </div>
+    </main>
+</body>
+
+</html>

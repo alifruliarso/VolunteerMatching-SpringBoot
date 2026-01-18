@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{home.index.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <!-- Hero Section -->
+            <section class="hero-section mb-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="hero-title mb-4">[[#{home.index.headline}]]</h1>
+                        <p class="hero-subtitle mb-4">[(#{home.index.text})]</p>
+                        <div class="hero-actions">
+                            <a th:href="@{/opportunities}" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-search me-2"></i>Find Volunteer Opportunities
+                            </a>
+                            <a th:href="@{/organizations/add}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-hands-helping me-2"></i>Post Opportunities
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="hero-image">
+                            <img th:src="@{/images/logo.png}" alt="Healthcare Volunteers" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section mb-5">
+                <div class="row">
+                    <!-- For Organizations -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="feature-card h-100">
+                            <div class="feature-header">
+                                <div class="feature-icon organization-icon">
+                                    <i class="fas fa-hospital"></i>
+                                </div>
+                                <h3 class="feature-title">For Organizations</h3>
+                            </div>
+                            <div class="feature-content">
+                                <ul class="feature-list">
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Create and manage your organization's profile
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Post new volunteer opportunities with details
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Specify required skills for each opportunity
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Review and manage volunteer registrations
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Approve or deny volunteer applications
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- For Volunteers -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="feature-card h-100">
+                            <div class="feature-header">
+                                <div class="feature-icon volunteer-icon">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <h3 class="feature-title">For Volunteers</h3>
+                            </div>
+                            <div class="feature-content">
+                                <ul class="feature-list">
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Create a personal user profile
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Add professional skills and certifications
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Search and filter volunteer opportunities
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Register for skills-matched events
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core System -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="feature-card h-100">
+                            <div class="feature-header">
+                                <div class="feature-icon system-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="feature-title">Core System</h3>
+                            </div>
+                            <div class="feature-content">
+                                <ul class="feature-list">
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Smart matching with verified skills
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Restricts registration to qualified volunteers
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Role-based access control
+                                    </li>
+                                    <li class="feature-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Secure platform for healthcare volunteering
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

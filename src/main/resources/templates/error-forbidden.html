@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>[[${errorTitle}]]</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="text-danger border-bottom border-danger">
+            <h2 class="mb-4">[[${errorTitle}]]</h1>
+            <p>[[${errorMessage}]]</p>
+        </div>
+    </div>
+</body>
+
+</html>

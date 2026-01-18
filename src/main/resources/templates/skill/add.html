@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{skill.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{skill.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/skills}" class="btn btn-secondary">[[#{skill.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('skill')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='skill', field='name', required=true)}" />
+                <input type="submit" th:value="#{skill.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{organization.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{organization.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/organizations/add}" class="btn btn-primary ms-2">[[#{organization.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${organizations.empty}">[[#{organization.list.empty}]]</div>
+            <div th:if="${!organizations.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{organization.name.label}]]</th>
+                            <th scope="col">[[#{organization.websiteUrl.label}]]</th>
+                            <th scope="col">[[#{organization.adminUserId.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="organization : ${organizations}">
+                            <td>[[${organization.name}]]</td>
+                            <td>[[${organization.websiteUrl}]]</td>
+                            <td>[[${organization.adminUserId}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/organizations/edit/{id}(id=${organization.id})}" class="btn btn-sm btn-secondary">[[#{organization.list.edit}]]</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

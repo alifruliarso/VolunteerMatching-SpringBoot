@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>[[#{opportunity.edit.headline}]]</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex flex-wrap mb-4">
+            <h1 class="flex-grow-1">[[#{opportunity.edit.headline}]]</h1>
+            <div>
+                <a th:href="@{/opportunities}" class="btn btn-secondary">[[#{opportunity.edit.back}]]</a>
+            </div>
+        </div>
+        <div th:replace="~{fragments/forms::globalErrors('opportunity')}" />
+        <form th:action="${requestUri}" method="post" novalidate="">
+            <input type="hidden" th:value="${opportunity.id}" name="id" />
+            <div th:replace="~{fragments/forms::inputRow(object='opportunity', field='title', required=true)}" />
+            <div th:replace="~{fragments/forms::inputRow(object='opportunity', field='description')}" />
+            <div th:replace="~{fragments/forms::inputRow(object='opportunity', field='address')}" />
+            <div
+                th:replace="~{fragments/forms::inputRow(object='opportunity', field='startTime', inputClass='js-datetimepicker')}" />
+            <div
+                th:replace="~{fragments/forms::inputRow(object='opportunity', field='endTime', inputClass='js-datetimepicker')}" />
+            <div th:replace="~{fragments/forms::inputRow(object='opportunity', field='slotsTotal', type='number')}" />
+            <input type="hidden" th:value="${opportunity.orgId}" name="orgId" />
+            <input type="submit" th:value="#{opportunity.edit.headline}" class="btn btn-primary mt-4" />
+        </form>
+    </div>
+</body>
+
+</html>

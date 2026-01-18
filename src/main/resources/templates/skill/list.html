@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{skill.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{skill.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/skills/add}" class="btn btn-primary ms-2">[[#{skill.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${skills.empty}">[[#{skill.list.empty}]]</div>
+            <div th:if="${!skills.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{skill.name.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="skill : ${skills}">
+                            <td>[[${skill.name}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/skills/edit/{id}(id=${skill.id})}" class="btn btn-sm btn-secondary">[[#{skill.list.edit}]]</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

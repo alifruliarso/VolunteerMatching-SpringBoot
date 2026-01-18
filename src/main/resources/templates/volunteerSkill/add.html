@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>[[#{volunteerSkill.add.headline}]]</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex flex-wrap mb-4">
+            <h1 class="flex-grow-1">[[#{volunteerSkill.add.headline}]]</h1>
+            <div>
+                <a th:href="@{/volunteerSkills}" class="btn btn-secondary">[[#{volunteerSkill.add.back}]]</a>
+            </div>
+        </div>
+        <div th:replace="~{fragments/forms::globalErrors('volunteerSkill')}" />
+        <form th:action="${requestUri}" method="post" novalidate="">
+            <input type="hidden" th:value="${volunteerSkill.userId}" name="userId" />
+            <input type="hidden" th:value="${volunteerSkill.verificationStatus}" name="verificationStatus" />
+            <!-- <div class="row mb-3">
+                <label class="col-md-2 col-form-label" for="skillId">[[#{volunteerSkill.field.skillId}]]</label>
+                <div class="col-md-10">
+                    <select id="skillId" name="skillId" class="form-control">
+                        <option value="">-- Select a Skill --</option>
+                        <option th:each="skill : ${skills}" th:value="${skill.id}" th:text="${skill.name}"
+                            th:selected="${skill.id == volunteerSkill.skillId}"></option>
+                    </select>
+                </div>
+            </div> -->
+            <div
+                th:replace="~{fragments/forms::inputRow(object='volunteerSkill', field='skillId', type='select', required=true)}" />
+            <div class="row mb-3">
+                <label class="col-md-2 col-form-label" for="expiryDate">[[#{volunteerSkill.expiryDate.label}]]</label>
+                <div class="col-md-10">
+                    <input type="text" id="expiryDate" name="expiryDate" />
+                    <div th:if="${#fields.hasErrors('volunteerSkill.expiryDate')}" class="invalid-feedback d-block">
+                        <p class="text-danger" th:if="${#fields.hasErrors('volunteerSkill.expiryDate')}">Expiry date is
+                            required</p>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" th:value="#{volunteerSkill.add.headline}" class="btn btn-primary mt-4" />
+        </form>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener('DOMContentLoaded', function () {
+                flatpickr("#expiryDate", {
+                    enableTime: true,
+                    dateFormat: "Y-m-dTH:i:S",
+                    altInput: true,
+                    altFormat: 'Y-m-d H:i:S',
+                    minDate: new Date().fp_incr(30)
+                });
+                // defaultDate: new Date().fp_incr(30)
+                // flatpickrConfig.enableTime = true;
+                // flatpickrConfig.altInput = true;
+                // flatpickrConfig.altFormat = 'Y-m-d H:i:S';
+                // flatpickrConfig.dateFormat = 'Y-m-dTH:i:S';
+                // // workaround label issue
+                // flatpickrConfig.onReady = function() {
+                //     const id = this.input.id;
+                //     this.input.id = null;
+                //     this.altInput.id = id;
+                // };
+            });
+            /*]]>*/
+        </script>
+    </div>
+</body>
+
+</html>

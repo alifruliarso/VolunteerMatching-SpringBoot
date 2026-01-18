@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{opportunityRequirement.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{opportunityRequirement.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/opportunityRequirements}" class="btn btn-secondary">[[#{opportunityRequirement.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('opportunityRequirement')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='opportunityRequirement', field='opportunityId', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='opportunityRequirement', field='skillId', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='opportunityRequirement', field='isMandatory', type='checkbox')}" />
+                <input type="submit" th:value="#{opportunityRequirement.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

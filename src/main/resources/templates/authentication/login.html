@@ -1,0 +1,497 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>[[#{authentication.login.headline}]]</title>
+    <style type="text/css">
+        /* Login Page Styles */
+        .login-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .login-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-bottom: none;
+        }
+
+        .login-title {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            opacity: 0.9;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .login-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .login-form .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-form .form-control:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.25);
+        }
+
+        .login-form .input-group-text {
+            border: 2px solid #e9ecef;
+            border-right: none;
+            background-color: #f8f9fa;
+        }
+
+        .login-form .input-group .form-control {
+            border-left: none;
+        }
+
+        .login-form .input-group .form-control:focus {
+            border-left: none;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .forgot-password {
+            color: #1a73e8;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+
+        /* Divider */
+        .divider {
+            position: relative;
+            text-align: center;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .divider-text {
+            background: white;
+            padding: 0 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Demo Users Card */
+        .demo-users-card {
+            border: 2px dashed #e9ecef;
+            border-radius: 0.75rem;
+            background: #f8f9fa;
+        }
+
+        .demo-users-header {
+            background: transparent;
+            border-bottom: 1px dashed #dee2e6;
+            padding: 1rem 1.25rem;
+        }
+
+        .demo-users-header h6 {
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .demo-user-list {
+            padding: 0;
+        }
+
+        .demo-user-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.5rem 0;
+        }
+
+        .demo-user-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .volunteer-icon {
+            background: linear-gradient(135deg, #00bcd4 0%, #00838f 100%);
+        }
+
+        .organization-icon {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        }
+
+        .admin-icon {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+        }
+
+        .demo-user-role {
+            color: #495057;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .demo-user-desc {
+            color: #6c757d;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .demo-login-btn {
+            border-width: 2px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .demo-login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Registration Links */
+        .register-text {
+            color: #6c757d;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .register-link {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+
+        /* Form Check Customization */
+        .form-check-input:checked {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+        }
+
+        .form-check-label {
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        /* Alert Customization */
+        .alert {
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d1edff 0%, #a3d5ff 100%);
+            color: #155724;
+        }
+
+        /* Password Toggle Button */
+        #togglePassword {
+            border: 2px solid #e9ecef;
+            border-left: none;
+            transition: all 0.3s ease;
+        }
+
+        #togglePassword:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem 0;
+            }
+
+            .login-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-title {
+                font-size: 1.75rem;
+            }
+
+            .demo-user-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .demo-user-icon {
+                margin-right: 0;
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .login-body {
+                padding: 1.5rem 1rem;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .register-text {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="login-container justify-content-center">
+            <div class="justify-content-center">
+                <!-- Login Card -->
+                <div class="card login-card">
+                    <div class="card-header login-header text-center">
+                        <!-- <img th:src="@{/images/logo.png}" th:alt="#{app.title}" width="60" height="60" class="mb-3" /> -->
+                        <h2 class="login-title">Welcome Back</h2>
+                        <p class="login-subtitle">Sign in to your healthcare volunteer account</p>
+                    </div>
+                    <div class="card-body login-body">
+                        <div th:replace="~{fragments/forms::globalErrors('authentication')}" />
+                        <!-- Login Form -->
+                        <form th:action="@{/login}" method="post" class="login-form">
+                            <!-- Username Field -->
+                            <div class="form-group mb-4">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-user me-2 text-primary"></i>Username or Email
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fas fa-user text-muted"></i>
+                                    </span>
+                                    <input type="text" class="form-control form-control-lg" id="email" name="email"
+                                        placeholder="Enter your username or email" required autocomplete="username">
+                                </div>
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="form-group mb-4">
+                                <label for="password" class="form-label">
+                                    <i class="fas fa-lock me-2 text-primary"></i>Password
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fas fa-lock text-muted"></i>
+                                    </span>
+                                    <input type="password" class="form-control form-control-lg" id="password"
+                                        name="password" placeholder="Enter your password" required
+                                        autocomplete="current-password">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Error Message -->
+                            <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show"
+                                role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Invalid username or password. Please try again.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <!-- Logout Message -->
+                            <div th:if="${param.logout}" class="alert alert-success alert-dismissible fade show"
+                                role="alert">
+                                <i class="fas fa-check-circle me-2"></i>
+                                You have been logged out successfully.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <!-- Login Button -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg login-btn">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Divider -->
+                        <!-- <div class="divider my-4">
+                            <span class="divider-text">or try a demo account</span>
+                        </div> -->
+
+                        <!-- Demo Users Card -->
+                        <div class="card demo-users-card">
+                            <div class="card-header demo-users-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-user-friends me-2"></i>Demo Accounts
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="demo-user-list">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary btn-sm demo-login-btn"
+                                                data-username="user1@member.com" data-password="123">
+                                                <i class="fas fa-play me-1"></i>Login as Member User 1
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary btn-sm demo-login-btn"
+                                                data-username="admin@health.example" data-password="123">
+                                                <i class="fas fa-play me-1"></i>Login as Admin Org 1
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary btn-sm demo-login-btn"
+                                                data-username="admin@vitacomp.com" data-password="123">
+                                                <i class="fas fa-play me-1"></i>Login as Admin Org 2
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            // Login page functionality
+            document.addEventListener('DOMContentLoaded', function () {
+                // Password visibility toggle
+                const togglePassword = document.getElementById('togglePassword');
+                const passwordInput = document.getElementById('password');
+
+                if (togglePassword && passwordInput) {
+                    togglePassword.addEventListener('click', function () {
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('fa-eye');
+                        this.querySelector('i').classList.toggle('fa-eye-slash');
+                    });
+                }
+
+                // Demo login functionality
+                const demoButtons = document.querySelectorAll('.demo-login-btn');
+                demoButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const username = this.getAttribute('data-username');
+                        const password = this.getAttribute('data-password');
+
+                        // Fill the form fields
+                        document.getElementById('email').value = username;
+                        document.getElementById('password').value = password;
+
+                        // Show loading state
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Logging in...';
+                        this.disabled = true;
+
+                        console.log('Demo login as:', username);
+                        console.log('Demo login pass:', password);
+
+                        // Submit the form after a short delay to show the loading state
+                        setTimeout(() => {
+                            document.querySelector('.login-form').submit();
+                        }, 1000);
+
+                        // Reset button after 3 seconds if submission fails
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                        }, 3000);
+                    });
+                });
+
+                // Add enter key support for login
+                const loginForm = document.querySelector('.login-form');
+                if (loginForm) {
+                    loginForm.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') {
+                            // Check if we're not in a demo button
+                            if (!e.target.closest('.demo-login-btn')) {
+                                this.submit();
+                            }
+                        }
+                    });
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>

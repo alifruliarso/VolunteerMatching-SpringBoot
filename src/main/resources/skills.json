@@ -1,0 +1,84 @@
+{
+  "healthcareSkills": [
+    {
+      "id": "sk_0njm1smprjsvq",
+      "name": "Registered Nurse (RN)"
+    },
+    {
+      "id": "sk_0njm1smprjsvr",
+      "name": "Licensed Practical Nurse (LPN)"
+    },
+    {
+      "id": "sk_0njm1smprjsvs",
+      "name": "Certified Nursing Assistant (CNA)"
+    },
+    {
+      "id": "sk_0njm1smprjsvt",
+      "name": "Medical Assistant"
+    },
+    {
+      "id": "sk_0njm1smprjsvu",
+      "name": "Phlebotomy"
+    },
+    {
+      "id": "sk_0njm1smprjsvv",
+      "name": "Emergency Medical Technician (EMT)"
+    },
+    {
+      "id": "sk_0njm1smprjsvw",
+      "name": "Paramedic"
+    },
+    {
+      "id": "sk_0njm1smprjsvx",
+      "name": "Physical Therapist"
+    },
+    {
+      "id": "sk_0njm1smprjsvy",
+      "name": "Occupational Therapist"
+    },
+    {
+      "id": "sk_0njm1smprjsvz",
+      "name": "Pharmacy Technician"
+    },
+    {
+      "id": "sk_0njm1smprjsw0",
+      "name": "Basic Life Support (BLS)"
+    },
+    {
+      "id": "sk_0njm1smprjsw1",
+      "name": "Advanced Cardiovascular Life Support (ACLS)"
+    },
+    {
+      "id": "sk_0njm1smprjsw2",
+      "name": "Cardiopulmonary Resuscitation (CPR)"
+    },
+    {
+      "id": "sk_0njm1smprjsw3",
+      "name": "HIPAA Compliance"
+    },
+    {
+      "id": "sk_0njm1smprjsw4",
+      "name": "Infection Control"
+    },
+    {
+      "id": "sk_0njm1smprjsw5",
+      "name": "Medical Terminology"
+    },
+    {
+      "id": "sk_0njm1smprjsw6",
+      "name": "Patient Assessment"
+    },
+    {
+      "id": "sk_0njm1smprjsw7",
+      "name": "Home Health Aide"
+    },
+    {
+      "id": "sk_0njm1smprjsw8",
+      "name": "Healthcare Administration"
+    },
+    {
+      "id": "sk_0njm1smprjsw9",
+      "name": "Clinical Documentation Improvement"
+    }
+  ]
+}

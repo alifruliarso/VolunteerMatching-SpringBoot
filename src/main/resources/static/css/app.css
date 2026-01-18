@@ -1,0 +1,478 @@
+/* Healthcare Header Styles */
+.healthcare-header {
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #00bcd4;
+}
+
+.healthcare-header .navbar-brand {
+    padding: 0.5rem 0;
+}
+
+.healthcare-header .health-logo {
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.healthcare-header .health-logo:hover {
+    transform: scale(1.1);
+}
+
+.healthcare-header .brand-text {
+    line-height: 1.2;
+}
+
+.healthcare-header .brand-title {
+    color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: block;
+}
+
+.healthcare-header .brand-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
+    font-weight: 400;
+    display: block;
+}
+
+.healthcare-header .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+.healthcare-header .navbar-nav .nav-link:hover,
+.healthcare-header .navbar-nav .nav-link:focus {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.healthcare-header .navbar-nav .dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.healthcare-header .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.healthcare-header .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.healthcare-header .dropdown-item:hover {
+    background-color: #e3f2fd;
+    color: #1a73e8;
+}
+
+.healthcare-header .header-actions {
+    margin-right: 1rem;
+}
+
+.healthcare-header .volunteer-btn {
+    color: white;
+    border-color: white;
+    font-weight: 600;
+    padding: 0.375rem 1rem;
+}
+
+.healthcare-header .volunteer-btn:hover {
+    background-color: white;
+    color: #1a73e8;
+    transform: translateY(-1px);
+}
+
+.healthcare-header .organization-btn {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: white;
+    font-weight: 600;
+    padding: 0.375rem 1rem;
+}
+
+.healthcare-header .organization-btn:hover {
+    background-color: #00acc1;
+    border-color: #00acc1;
+    transform: translateY(-1px);
+    color: white;
+}
+
+/* Navbar toggler customization */
+.healthcare-header .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.healthcare-header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .healthcare-header .header-actions {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .healthcare-header .navbar-collapse {
+        text-align: center;
+    }
+    
+    .healthcare-header .navbar-nav {
+        padding: 1rem 0;
+    }
+    
+    .healthcare-header .nav-link {
+        margin: 0.25rem 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .healthcare-header .brand-title {
+        font-size: 1.2rem;
+    }
+    
+    .healthcare-header .header-actions .btn {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.75rem;
+    }
+}
+
+/* Quick Actions Section */
+.action-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.action-card .list-group-item {
+    border: 1px solid #e9ecef;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.action-card .list-group-item:hover {
+    background-color: #f8f9fa;
+    border-color: #1a73e8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-actions .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-actions .btn:last-child {
+        margin-bottom: 0;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem 0.5rem;
+    }
+}
+
+/* Features Section Styles */
+.features-section {
+    padding: 2rem 0;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.organization-icon {
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+}
+
+.volunteer-icon {
+    background: linear-gradient(135deg, #00bcd4 0%, #00838f 100%);
+}
+
+.system-icon {
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+}
+
+.feature-title {
+    color: #1a73e8;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.feature-content {
+    height: calc(100% - 120px);
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.feature-item {
+    padding: 0.5rem 0;
+    color: #5f6368;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+}
+
+.feature-item i {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.feature-action {
+    text-align: center;
+}
+
+.feature-action .btn {
+    border-width: 2px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+}
+
+/* Home Page Styles (Keep existing styles and add new ones) */
+.hero-section {
+    padding: 3rem 0;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a73e8;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #5f6368;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    margin-top: 2rem;
+}
+
+.hero-image img {
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image .img-fluid {
+    width: 75%;
+    height: auto;
+}
+
+/* How It Works Section */
+.how-it-works h2 {
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+.step-card {
+    padding: 2rem 1rem;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.step-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.step-title {
+    color: #1a73e8;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.step-description {
+    color: #5f6368;
+    line-height: 1.6;
+}
+
+/* Quick Actions Section */
+.action-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.action-card .list-group-item {
+    border: 1px solid #e9ecef;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.action-card .list-group-item:hover {
+    background-color: #f8f9fa;
+    border-color: #1a73e8;
+}
+
+/* Admin Dashboard */
+.admin-dashboard .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.admin-dashboard .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard .card-title {
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+.admin-dashboard .btn-outline-primary {
+    border-width: 2px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-actions .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-actions .btn:last-child {
+        margin-bottom: 0;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .feature-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .feature-card {
+        padding: 1rem;
+    }
+}
+
+/* Progress bar animations */
+.progress-bar {
+    transition: width 0.5s ease-in-out;
+}
+
+.organization-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 0.5rem;
+}

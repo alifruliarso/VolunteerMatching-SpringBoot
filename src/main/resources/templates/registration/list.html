@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{layout}">
+
+<head>
+    <title>[[#{registration.list.headline}]]</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex flex-wrap mb-4">
+            <h1 class="flex-grow-1">[[#{registration.list.headline}]]</h1>
+            <div>
+                <a th:if="${hasOrganizer}" th:href="@{/registrations/add}"
+                    class="btn btn-primary ms-2">[[#{registration.list.createNew}]]</a>
+            </div>
+        </div>
+        <div th:if="${registrations.empty}">[[#{registration.list.empty}]]</div>
+        <div th:if="${!registrations.empty}" class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">[[#{registration.fullName.label}]]</th>
+                        <th scope="col">[[#{registration.opportunityTitle.label}]]</th>
+                        <th scope="col">[[#{registration.status.label}]]</th>
+                        <th scope="col">[[#{registration.registrationTime.label}]]</th>
+                        <th><!-- --></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="registration : ${registrations}">
+                        <td>[[${registration.fullName}]]</td>
+                        <td>[[${registration.opportunityTitle}]]</td>
+                        <td>
+                            <div><span class="badge bg-success">[[${registration.status}]]</span></div>
+                        </td>
+                        <td>[[${registration.registrationTime}]]</td>
+                        <td>
+                            <div th:if="${hasOrganizer}" class="float-end text-nowrap">
+                                <form th:if="${registration.isPending}"
+                                    th:action="@{/registrations/approve/{id}(id=${registration.id})}"
+                                    th:data-confirm-message="#{registration.approve.confirm}" method="post"
+                                    class="js-submit-confirm d-inline">
+                                    <button type="submit"
+                                        class="btn btn-sm btn-primary">[[#{registration.list.approve}]]</button>
+                                </form>
+                                <form th:if="${registration.isPending}"
+                                    th:action="@{/registrations/reject/{id}(id=${registration.id})}"
+                                    th:data-confirm-message="#{registration.reject.confirm}" method="post"
+                                    class="js-submit-confirm d-inline">
+                                    <button type="submit"
+                                        class="btn btn-sm btn-primary">[[#{registration.list.reject}]]</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
